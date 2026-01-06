@@ -26,3 +26,6 @@ _pkginfo.txt
 *.tmp
 
 .DS_Store
+
+app.config
+App.config
