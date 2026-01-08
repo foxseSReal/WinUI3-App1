@@ -14,7 +14,7 @@
     </Window.SystemBackdrop>
 
     <Grid>
-        <NavigationView SelectionChanged="NavView_SelectionChanged" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" Loaded="NavView_Loaded" x:Name="NavView">
+        <NavigationView SelectionChanged="NavView_SelectionChanged" IsBackButtonVisible="Collapsed" IsSettingsVisible="True" Loaded="NavView_Loaded" x:Name="NavView">
 
             <NavigationView.PaneCustomContent>
                 <HyperlinkButton x:Name="PaneHyperlink" Content="Contact"  Margin="12,0" Visibility="Visible" />
