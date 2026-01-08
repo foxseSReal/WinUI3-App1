@@ -31,13 +31,19 @@
                           SelectionMode="None"
                           CalendarIdentifier="GregorianCalendar"
                           CalendarItemBorderThickness="1.2"
+                          SelectedDatesChanged="_Calendar_SelectedDatesChanged"
                           />
-            <StackPanel Margin="50 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <StackPanel Margin="50 0 0 0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <CheckBox x:Name="_CalendarSelectionModes" Content="SelectionMode"
           IsThreeState="True"
           Checked="CheckBox_Checked"
           Unchecked="CheckBox_Unchecked"
           Indeterminate="CheckBox_Indeterminate" />
+                <InfoBar IsOpen="False" Severity="Warning" Title="Seçim Sayısı" Message="Multiple Seçim kısmında sadece 7 gün seçilir.">
+                    <InfoBar.ActionButton>
+                        <Button Content="Ayarlar" Click="InfoBarButton_Click" />
+                    </InfoBar.ActionButton
+                </InfoBar>
             </StackPanel>
             
             <!--Column 2 -->
