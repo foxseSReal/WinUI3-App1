@@ -91,7 +91,12 @@ namespace App1.View
 
         private async void InfoBarButton_Click(object sender, RoutedEventArgs e)
         {
-            await ContentDialogs.DefaultDialog(this.XamlRoot, "Bilgi", "Birden fazla tarih seçimi etkinleþtirildi. Maksimum 7 tarih seçebilirsiniz.");
+            //await ContentDialogs.DefaultDialog(this.XamlRoot, "Bilgi", "Birden fazla tarih seçimi etkinleþtirildi. Maksimum 7 tarih seçebilirsiniz.");
+            await ContentDialogs.PanelDialog(this.XamlRoot);
+
         }
+
+
+
     }
 }
