@@ -28,29 +28,27 @@
                           SelectedPressedBorderBrush="SaddleBrown"
                           IsOutOfScopeEnabled="True" 
                           IsGroupLabelVisible="True"
-                          SelectionMode="None"
+                          SelectionMode="{x:Bind ViewModel.CalendarMode, Mode=OneWay}"
                           CalendarIdentifier="GregorianCalendar"
                           CalendarItemBorderThickness="1.2"
                           SelectedDatesChanged="_Calendar_SelectedDatesChanged"
                           />
             <StackPanel Margin="20 0 0 0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <CheckBox x:Name="_CalendarSelectionModes" Content="SelectionMode"
-          IsThreeState="True"
-          Checked="CheckBox_Checked"
-          Unchecked="CheckBox_Unchecked"
-          Indeterminate="CheckBox_Indeterminate" />
-                <InfoBar  x:Name="_InfoBar" Height="120" Width="400" IsOpen="False" FontWeight="Bold" Severity="Warning" Title="Seçim Sayısı" Message="Multiple Seçim kısmında sadece 7 gün seçilir.">
+                <CheckBox x:Name="_CalendarSelectionModes" Content="{x:Bind ViewModel.CheckBoxContent, Mode=OneWay}"
+                          IsChecked="{x:Bind ViewModel.CheckBoxStatus ,Mode=TwoWay}"
+                          IsThreeState="True"/>
+                <InfoBar  x:Name="_InfoBar" Height="120" Width="400" IsOpen="{x:Bind ViewModel.IsInfoBarOpen, Mode=OneWay}" FontWeight="Bold" Severity="Warning" Title="Seçim Sayısı" Message="Multiple Seçim kısmında sadece 7 gün seçilir.">
                     <InfoBar.ActionButton>
                         <Button Content="Ayarlar" Click="InfoBarButton_Click"/>
                     </InfoBar.ActionButton>
                 </InfoBar>
             </StackPanel>
-            
+
             <!--Column 2 -->
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                
+
             </StackPanel>
-            
+
         </StackPanel>
     </Grid>
 </Page>
