@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.StartScreen;
 
 namespace App1.ViewModel
 {
@@ -34,7 +35,7 @@ namespace App1.ViewModel
 
 
         //Standart bir bilgilendirme dialogu.
-        internal static async Task DefaultDialog(XamlRoot root,string _title, string _content)
+        internal static async Task DefaultDialog(XamlRoot root, string _title, string _content)
         {
             ContentDialog dialog = new ContentDialog();
 
@@ -46,6 +47,33 @@ namespace App1.ViewModel
 
             var result = await dialog.ShowAsync();
         }
+        internal static async Task PanelDialog(XamlRoot root)
+        {
+            StackPanel _panel = new StackPanel { Spacing = 10 };
+            TextBlock _content = new TextBlock
+            {
+                Text = "Uygulama kapatılacak, Onaylıyor musunuz?",
+                FontSize = 20,
+                TextWrapping = TextWrapping.Wrap,
+                FontWeight = Microsoft.UI.Text.FontWeights.Bold,
+                TextAlignment = TextAlignment.Center
+            };
+            _panel.Children.Add(_content);
+            
+
+            ContentDialog dialog = new ContentDialog();
+
+            dialog.XamlRoot = root;
+            dialog.Title = "Close";
+            dialog.Content = _panel;
+            dialog.PrimaryButtonText = "Tamam";
+            dialog.SecondaryButtonText = "İptal";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+
+            await dialog.ShowAsync(ContentDialogPlacement.Popup);
+        }
+
+
 
     }
 }
