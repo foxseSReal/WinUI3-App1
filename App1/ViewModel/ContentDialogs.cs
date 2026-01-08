@@ -59,10 +59,7 @@ namespace App1.ViewModel
                 TextAlignment = TextAlignment.Center
             };
             _panel.Children.Add(_content);
-            
-
             ContentDialog dialog = new ContentDialog();
-
             dialog.XamlRoot = root;
             dialog.Title = "Close";
             dialog.Content = _panel;
