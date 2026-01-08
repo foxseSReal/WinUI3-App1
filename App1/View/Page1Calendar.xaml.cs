@@ -43,6 +43,21 @@ namespace App1.View
         {
             _Calendar.SelectionMode = CalendarViewSelectionMode.Multiple;
             _CalendarSelectionModes.Content = "SelectionMode: Multiple";
+
+        }
+
+        private void _Calendar_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args)
+        {
+            //Kullanýcý tarih seçtiðinde yapýlacak iþlemler buraya eklenebilir
+            //Tarihleri kistlamamizda gerekiyor ayrica
+
+
+
+        }
+
+        private void InfoBarButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
