@@ -27,5 +27,22 @@ namespace App1.View
         {
             InitializeComponent();
         }
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            _Calendar.SelectionMode = CalendarViewSelectionMode.None;
+            _CalendarSelectionModes.Content= "SelectionMode: None";
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            _Calendar.SelectionMode = CalendarViewSelectionMode.Single;
+            _CalendarSelectionModes.Content = "SelectionMode: Single";
+        }
+
+        private void CheckBox_Indeterminate(object sender, RoutedEventArgs e)
+        {
+            _Calendar.SelectionMode = CalendarViewSelectionMode.Multiple;
+            _CalendarSelectionModes.Content = "SelectionMode: Multiple";
+        }
     }
 }

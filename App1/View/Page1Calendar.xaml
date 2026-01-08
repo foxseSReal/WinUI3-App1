@@ -9,6 +9,25 @@
     mc:Ignorable="d">
 
     <Grid>
-
+        <StackPanel>
+            <CalendarView x:Name="_Calendar" Width="400" Height="400" Language="tr" Margin="20 50 0 0" SelectedBorderBrush="SandyBrown" 
+                          SelectedForeground="SandyBrown" 
+                          TodayBackground="Aqua"
+                          TodayPressedBackground="SandyBrown"
+                          PressedBorderBrush="Transparent"
+                          PressedForeground="SandyBrown"
+                          SelectedPressedForeground="SaddleBrown"
+                          SelectedPressedBorderBrush="SaddleBrown"
+                          IsOutOfScopeEnabled="True" 
+                          IsGroupLabelVisible="True"
+                          SelectionMode="None"/>
+            <StackPanel Margin="50 0 0 0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <CheckBox x:Name="_CalendarSelectionModes" Content="SelectionMode"
+          IsThreeState="True"
+          Checked="CheckBox_Checked"
+          Unchecked="CheckBox_Unchecked"
+          Indeterminate="CheckBox_Indeterminate" />
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
