@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.StartScreen;
 
-namespace App1.ViewModel
+namespace App1.Helpers
 {
     internal static class ContentDialogs
     {
