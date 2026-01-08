@@ -14,13 +14,25 @@
     </Window.SystemBackdrop>
 
     <Grid>
-        <NavigationView SelectionChanged="NavView_SelectionChanged" Loaded="NavView_Loaded" x:Name="NavView">
+        <NavigationView SelectionChanged="NavView_SelectionChanged" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" Loaded="NavView_Loaded" x:Name="NavView">
+
+            <NavigationView.PaneCustomContent>
+                <HyperlinkButton x:Name="PaneHyperlink" Content="Contact"  Margin="12,0" Visibility="Visible" />
+            </NavigationView.PaneCustomContent>
+
+
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="Calendar" FontWeight="Bold" FontSize="24" Content="Takvim" Tag="Calendar" />
                 <NavigationViewItem Icon="List" FontWeight="Bold" FontSize="24" Content="Kayıtları Listele" Tag="EventList" />
                 <NavigationViewItem Icon="Add" FontWeight="Bold" FontSize="24" Content="Kayıt Ekle" Tag="EventAdd" />
             </NavigationView.MenuItems>
-            <Frame x:Name="ContentFrame"/>
+            <Frame x:Name="ContentFrame">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition  />
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
         </NavigationView>
     </Grid>
 </Window>

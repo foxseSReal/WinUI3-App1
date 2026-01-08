@@ -1,10 +1,13 @@
 using App1.View;
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -13,6 +16,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics;
 using Windows.Networking.NetworkOperators;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -28,14 +32,44 @@ namespace App1
         public MainWindow()
         {
             InitializeComponent();
+            this.ExtendsContentIntoTitleBar = true;
+            this.SetTitleBar(null);
+            // Pencere boyutunu belirle (Ýsteðe baðlý, ama ortalamadan önce boyut vermek iyidir)
+            IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            WindowId windowId = Win32Interop.GetWindowIdFromWindow(hWnd);
+            AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
+
+            // Örnek: 1000x700 piksel boyutunda olsun
+            appWindow.Resize(new SizeInt32(1280, 720));
+
+            // PENCEREYÝ ORTALA
+            CenterAppWindow(appWindow);
         }
+
+        private void CenterAppWindow(AppWindow appWindow)
+        {
+            // 1. Pencerenin þu an bulunduðu ekraný (DisplayArea) al
+            DisplayArea displayArea = DisplayArea.GetFromWindowId(appWindow.Id, DisplayAreaFallback.Primary);
+
+            // 2. Ekranýn "WorkArea"sýný (Görev çubuðu hariç alan) al
+            var workArea = displayArea.WorkArea;
+
+            // 3. Ortalamak için X ve Y koordinatlarýný hesapla
+            // Formül: (Ekran Geniþliði - Pencere Geniþliði) / 2
+            int centerX = ((workArea.Width - appWindow.Size.Width) / 2) + workArea.X;
+            int centerY = ((workArea.Height - appWindow.Size.Height) / 2) + workArea.Y;
+
+            // 4. Pencereyi hesaplanan konuma taþý
+            appWindow.Move(new PointInt32(centerX, centerY));
+        }
+
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
             // Ýlk öðeyi seçili hale getir
             NavView.SelectedItem = NavView.MenuItems[0];
 
             // Frame'i Anasayfaya yönlendir
-            ContentFrame.Navigate(typeof(Page1Calendar));
+            ContentFrame.Navigate(typeof(Page1Calendar), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -57,15 +91,15 @@ namespace App1
                 switch (selectedTag)
                 {
                     case "Calendar":
-                        ContentFrame.Navigate(typeof(Page1Calendar));
+                        ContentFrame.Navigate(typeof(Page1Calendar), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                         break;
 
                     case "EventList":
-                        ContentFrame.Navigate(typeof(Page2EventList));
+                        ContentFrame.Navigate(typeof(Page2EventList), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                         break;
 
                     case "EventAdd":
-                        ContentFrame.Navigate(typeof(Page3EventAdd));
+                        ContentFrame.Navigate(typeof(Page3EventAdd), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                         break;
                 }
             }
