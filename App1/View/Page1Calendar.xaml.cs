@@ -15,6 +15,8 @@ using Windows.Foundation.Collections;
 using Windows.UI.Popups;
 using System.Threading.Tasks;
 using App1.Helpers;
+using App1.ViewModel; //ViewModel klasorunu kullanmak icin eklendi.
+
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -23,32 +25,19 @@ namespace App1.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
+    /// 
+    //
+
     public sealed partial class Page1Calendar : Page
     {
+        //Asagidaki kodda Modeller arasinda baglanti saglandi.
+        //x:Bind Ozelligini kullanabilmek icin public olmasi gerekiyor.
+        //Iki taraftaki metodlarinda ayni sekilde baslamasi lazim.
+        public Page1CalandarModel ViewModel { get; } = new Page1CalandarModel();
         public Page1Calendar()
         {
             InitializeComponent();
         }
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            _Calendar.SelectionMode = CalendarViewSelectionMode.None;
-            _CalendarSelectionModes.Content = "SelectionMode: None";
-        }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            _Calendar.SelectionMode = CalendarViewSelectionMode.Single;
-            _CalendarSelectionModes.Content = "SelectionMode: Single";
-        }
-
-        private void CheckBox_Indeterminate(object sender, RoutedEventArgs e)
-        {
-            _Calendar.SelectionMode = CalendarViewSelectionMode.Multiple;
-            _CalendarSelectionModes.Content = "SelectionMode: Multiple";
-            _InfoBar.IsOpen = true;
-
-        }
-
         private async void _Calendar_SelectedDatesChanged(CalendarView sender, CalendarViewSelectedDatesChangedEventArgs args)
         {
             //Kullanýcý tarih seçtiðinde yapýlacak iþlemler buraya eklenebilir
