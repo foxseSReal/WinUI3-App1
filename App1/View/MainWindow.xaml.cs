@@ -34,58 +34,42 @@ namespace App1
             InitializeComponent();
             this.ExtendsContentIntoTitleBar = true;
             this.SetTitleBar(null);
-            // Pencere boyutunu belirle (Ýsteðe baðlý, ama ortalamadan önce boyut vermek iyidir)
             IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
             WindowId windowId = Win32Interop.GetWindowIdFromWindow(hWnd);
             AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
-
-            // Örnek: 1000x700 piksel boyutunda olsun
             appWindow.Resize(new SizeInt32(1280, 720));
-
-            // PENCEREYÝ ORTALA
             CenterAppWindow(appWindow);
         }
 
         private void CenterAppWindow(AppWindow appWindow)
         {
-            // 1. Pencerenin þu an bulunduðu ekraný (DisplayArea) al
             DisplayArea displayArea = DisplayArea.GetFromWindowId(appWindow.Id, DisplayAreaFallback.Primary);
 
-            // 2. Ekranýn "WorkArea"sýný (Görev çubuðu hariç alan) al
             var workArea = displayArea.WorkArea;
 
-            // 3. Ortalamak için X ve Y koordinatlarýný hesapla
-            // Formül: (Ekran Geniþliði - Pencere Geniþliði) / 2
             int centerX = ((workArea.Width - appWindow.Size.Width) / 2) + workArea.X;
             int centerY = ((workArea.Height - appWindow.Size.Height) / 2) + workArea.Y;
 
-            // 4. Pencereyi hesaplanan konuma taþý
             appWindow.Move(new PointInt32(centerX, centerY));
         }
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
-            // Ýlk öðeyi seçili hale getir
             NavView.SelectedItem = NavView.MenuItems[0];
 
-            // Frame'i Anasayfaya yönlendir
             ContentFrame.Navigate(typeof(Page1Calendar), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            // Eðer "Ayarlar" (Settings) seçildiyse (WinUI bunu otomatik yönetir)
             if (args.IsSettingsSelected)
             {
-                // Ayarlar sayfasý oluþturduysanýz burayý açabilirsiniz
-                // ContentFrame.Navigate(typeof(SettingsPage));
+                //Ayarlar sayfasina yönlendirme yapýlabilir
             }
             else
             {
-                // Seçilen öðeyi al
                 var selectedItem = (NavigationViewItem)args.SelectedItem;
 
-                // Tag deðerine göre sayfayý bul
                 string? selectedTag = selectedItem.Tag.ToString();
 
                 switch (selectedTag)
